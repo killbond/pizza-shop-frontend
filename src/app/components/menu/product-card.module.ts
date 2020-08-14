@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuComponent } from './menu.component';
-import { PizzaMenuComponent } from './pizza-menu.component';
+import { ProductCardComponent } from './product-card.component';
 import { InputStepperModule } from "../input-stepper/input-stepper.module";
 import { SharedModule } from "../../shared.module";
 
 @NgModule({
   declarations: [
-    MenuComponent,
-    PizzaMenuComponent,
+    ProductCardComponent,
   ],
   exports: [
-    MenuComponent,
-    PizzaMenuComponent,
+    ProductCardComponent,
   ],
   imports: [
     CommonModule,
@@ -20,5 +17,5 @@ import { SharedModule } from "../../shared.module";
     SharedModule,
   ]
 })
-export class MenuModule {
+export class ProductCardModule {
 }

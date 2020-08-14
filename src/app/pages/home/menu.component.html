@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Pizza</h1>
+</div>
+
+<div class="container">
+  <div class="card-deck mb-3 flex-wrap">
+    <app-product-card
+        (added)="addToCart($event)"
+        *ngFor="let pizza of pizzas; trackBy: ( 'id' | trackByProperty )"
+        [product]="pizza"
+        class="mb-4">
+    </app-product-card>
+  </div>
+</div>
+
+<ng-container *ngFor="let category of categories; trackBy: ( 'id' | trackByProperty )">
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">{{ category.name }}</h1>
+  </div>
+
+  <div class="container">
+    <div class="card-deck mb-3 flex-wrap">
+      <app-product-card
+          (added)="addToCart($event)"
+          *ngFor="let product of filterByCategoryId(products, category.id); trackBy: ( 'id' | trackByProperty )"
+          [product]="product"
+          class="mb-4">
+      </app-product-card>
+    </div>
+  </div>
+</ng-container>

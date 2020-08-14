@@ -15,7 +15,7 @@ export class PricePipe implements PipeTransform {
   }
 
   transform(value: number, ...args: unknown[]): unknown {
-    let exchanged = value * this.service.active.usd_rate
+    let exchanged = value * this.service.active?.usd_rate
     return this.currency.transform(exchanged, this.service.active.code)
   }
 
