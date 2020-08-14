@@ -23,7 +23,6 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('menu on init')
     combineLatest([this.api.get('products'), this.api.get('categories')])
       .subscribe((data: [PizzaInterface[], ProductInterface[]]) => {
         let [products, categories] = data

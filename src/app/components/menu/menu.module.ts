@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu.component';
 import { PizzaMenuComponent } from './pizza-menu.component';
 import { InputStepperModule } from "../input-stepper/input-stepper.module";
-import { TrackByPropertyPipe } from "../../pipes/pipestrack-by-property.pipe";
+import { SharedModule } from "../../shared.module";
 
 @NgModule({
   declarations: [
     MenuComponent,
     PizzaMenuComponent,
-    TrackByPropertyPipe,
   ],
   exports: [
     MenuComponent,
@@ -18,6 +17,7 @@ import { TrackByPropertyPipe } from "../../pipes/pipestrack-by-property.pipe";
   imports: [
     CommonModule,
     InputStepperModule,
+    SharedModule,
   ]
 })
 export class MenuModule {

@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InputStepperComponent } from './input-stepper.component';
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { NavbarComponent } from "./navbar.component";
+import { NgbDropdownModule } from "@ng-bootstrap/ng-bootstrap";
 import { SharedModule } from "../../shared.module";
-
 
 @NgModule({
   declarations: [
-    InputStepperComponent,
+    NavbarComponent,
   ],
   exports: [
-    InputStepperComponent,
+    NavbarComponent,
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule,
+    NgbDropdownModule,
     SharedModule,
   ]
 })
-export class InputStepperModule {
+export class NavbarModule {
 }
