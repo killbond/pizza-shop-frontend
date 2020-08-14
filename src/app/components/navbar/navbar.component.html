@@ -1,0 +1,17 @@
+<div class="d-flex flex-row flex-md-row align-items-center justify-content-between p-3 px-md-4 mb-3 navbar-dark bg-primary border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal text-white">Pizza shop</h5>
+    <div class="d-inline-block mr-3" ngbDropdown>
+        <button class="btn btn-primary" ngbDropdownToggle>
+            {{ currency.active?.code }}
+        </button>
+        <div aria-labelledby="dropdownBasic1" ngbDropdownMenu>
+            <button (click)="currency.active = item"
+                    *ngFor="let item of currencies; trackBy: ( 'id' | trackByProperty )"
+                    [class.active]="currency.active.id === item.id"
+                    ngbDropdownItem>
+                {{ item.code }}
+            </button>
+        </div>
+    </div>
+    <a class="btn btn-primary" href="#">Sign up</a>
+</div>
