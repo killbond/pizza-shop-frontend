@@ -12,6 +12,8 @@ import { CartComponent } from "./pages/cart/cart.component";
 import { HistoryComponent } from "./pages/history/history.component";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "./shared.module";
+import { InputStepperModule } from "./components/input-stepper/input-stepper.module";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { SharedModule } from "./shared.module";
     ProductCardModule,
     NavbarModule,
     SharedModule,
+    InputStepperModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

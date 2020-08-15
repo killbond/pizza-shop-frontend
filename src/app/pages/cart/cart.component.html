@@ -1,1 +1,60 @@
-<app-navbar></app-navbar>
+<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Cart</h1>
+</div>
+
+<div *ngIf="cart.count() == 0" class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="lead">Empty</h1>
+</div>
+
+<div *ngIf="cart.count() > 0" class="container">
+  <table class="table table-hover table-condensed" id="cart">
+    <thead>
+    <tr>
+      <th style="width:50%">Product</th>
+      <th style="width:10%">Price</th>
+      <th style="width:12%">Quantity</th>
+      <th class="text-center" style="width:15%">Subtotal</th>
+      <th style="width:13%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of cart.get(); trackBy: ('id' | trackByProperty)">
+      <td data-th="Product">
+        <div class="row d-flex align-middle">
+          <div class="col-sm-4 hidden-sm">
+            <img class="img-responsive" src="{{ item.product.image.url }}"/>
+          </div>
+          <div class="col-sm-8 small d-flex flex-column justify-content-center product-body">
+            <h4>{{ item.product.name }}</h4>
+            <p>{{ item.product.description }}</p>
+          </div>
+        </div>
+      </td>
+      <td data-th="Price">{{ item.product.price | price }}</td>
+      <td data-th="Quantity">
+        <app-input-stepper
+            #stepper
+            (valueChange)="cart.add(item.product, stepper.value - item.quantity)"
+            [value]="item.quantity">
+        </app-input-stepper>
+      </td>
+      <td class="text-md-center" data-th="Subtotal">{{ (item.product.price * stepper.value) | price }}</td>
+      <td class="actions" data-th="">
+        <button (click)="cart.remove(item.product)" class="btn btn-danger btn-sm w-100">
+          <fa-icon [icon]="faTrash"></fa-icon>
+          <span class="ml-2">Remove</span>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td><a [routerLink]="['/menu']" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+      </td>
+      <td class="hidden-sm" colspan="2"></td>
+      <td class="hidden-sm text-center"><strong>Total <span>{{ total | price }}</span></strong></td>
+      <td><a class="btn btn-success btn-block" href="#">Checkout <i class="fa fa-angle-right"></i></a></td>
+    </tr>
+    </tfoot>
+  </table>
+</div>

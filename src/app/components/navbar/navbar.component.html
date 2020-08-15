@@ -11,16 +11,15 @@
     </ul>
     <ul class="navbar-nav ">
       <li class="nav-item">
-        <a [routerLink]="['/cart']" class="nav-link">
-          <fa-layers class="fa-fw fa-lg">
+        <a [routerLink]="['/cart']" class="nav-link mr-3">
+          <fa-layers class="fa-fw">
             <fa-icon [icon]="faCart"></fa-icon>
-            <fa-layers-counter *ngIf="cart.count() > 0" [content]="cart.count().toString()"
-                               class="counter"></fa-layers-counter>
+            <fa-layers-counter *ngIf="cart.count() > 0" [content]="cart.count().toString()" class="counter"></fa-layers-counter>
           </fa-layers>
         </a>
       </li>
       <li class="nav-item">
-        <div class="d-inline-block mr-3" ngbDropdown>
+        <div class="d-inline-block mr-3 small" ngbDropdown>
           <button class="btn btn-primary" ngbDropdownToggle>
             {{ currency.active?.code }}
           </button>

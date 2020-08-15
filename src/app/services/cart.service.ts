@@ -22,12 +22,18 @@ export class CartService {
     let index = this.findIndex(product)
     if (-1 === index) {
       this.positions.push({
-        product_id: product.id,
+        product: product,
         quantity: quantity
       })
     } else {
       this.positions[index].quantity += quantity
     }
+  }
+
+  remove(product: Item): void {
+    this.positions = this.positions.filter((item: OrderPositionInterface) => {
+      return product.id !== item.product.id
+    })
   }
 
   get(): OrderPositionInterface[] {
@@ -38,9 +44,17 @@ export class CartService {
     return this.positions.length
   }
 
+  total(): number {
+    let sum = 0
+    for (let item of this.positions) {
+      sum += item.quantity * item.product.price
+    }
+    return sum
+  }
+
   private findIndex(product: Item): number {
     return this.positions.findIndex((item: OrderPositionInterface) => {
-      return item.product_id === product.id
+      return item.product.id === product.id
     })
   }
 }
