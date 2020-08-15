@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "./navbar.component";
-import { NgbDropdownModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbCollapseModule, NgbDropdownModule } from "@ng-bootstrap/ng-bootstrap";
 import { SharedModule } from "../../shared.module";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -15,6 +17,9 @@ import { SharedModule } from "../../shared.module";
     CommonModule,
     NgbDropdownModule,
     SharedModule,
+    NgbCollapseModule,
+    FontAwesomeModule,
+    RouterModule,
   ]
 })
 export class NavbarModule {
