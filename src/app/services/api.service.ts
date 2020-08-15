@@ -16,15 +16,15 @@ export class ApiService {
     private http: HttpClient,
   ) {}
 
-  get(path: string): Observable<Object> {
+  get<T>(path: string): Observable<T> {
     return this.request('get', path)
   }
 
-  post(path: string, body: any): Observable<Object> {
+  post<T>(path: string, body: any): Observable<T> {
     return this.request('post', path, body)
   }
 
-  private request(method: string, path: string, body: any = null): Observable<Object> {
+  private request<T>(method: string, path: string, body: any = null): Observable<T> {
     return this.http.request(method, this.endpoint + path, {body: body})
       .pipe(map((response: ApiResponseInterface) => response.data ?? response))
   }

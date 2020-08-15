@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { OrderPositionInterface } from "../interfaces/order-position.interface";
+import { CartPositionInterface } from "../interfaces/cart-position.interface";
 import { ApiService } from "./api.service";
 import { ProductInterface } from "../interfaces/product.interface";
 import { PizzaInterface } from "../interfaces/pizza.interface";
+import { Observable } from "rxjs";
+import { OrderInterface } from "../interfaces/order.interface";
+import { OrderResponseInterface } from "../interfaces/order-response.interface";
 
 type Item = PizzaInterface | ProductInterface
 
@@ -11,7 +14,7 @@ type Item = PizzaInterface | ProductInterface
 })
 export class CartService {
 
-  private positions: OrderPositionInterface[] = []
+  private positions: CartPositionInterface[] = []
 
   constructor(
     private api: ApiService
@@ -31,17 +34,21 @@ export class CartService {
   }
 
   remove(product: Item): void {
-    this.positions = this.positions.filter((item: OrderPositionInterface) => {
+    this.positions = this.positions.filter((item: CartPositionInterface) => {
       return product.id !== item.product.id
     })
   }
 
-  get(): OrderPositionInterface[] {
+  get(): CartPositionInterface[] {
     return this.positions
   }
 
   count(): number {
     return this.positions.length
+  }
+
+  isEmpty(): boolean {
+    return this.positions.length == 0
   }
 
   total(): number {
@@ -52,8 +59,16 @@ export class CartService {
     return sum
   }
 
+  submit(order: OrderInterface): Observable<OrderResponseInterface> {
+    return this.api.post('orders', order)
+  }
+
+  flush() {
+    this.positions.length = 0
+  }
+
   private findIndex(product: Item): number {
-    return this.positions.findIndex((item: OrderPositionInterface) => {
+    return this.positions.findIndex((item: CartPositionInterface) => {
       return item.product.id === product.id
     })
   }
