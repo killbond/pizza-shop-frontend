@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from "../../services/cart.service";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-cart',
@@ -7,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() {
-    console.log('cart component loaded')
+  faTrash = faTrash
+
+  constructor(
+    public cart: CartService
+  ) {
+  }
+
+  get total(): number {
+    return this.cart.total()
   }
 
   ngOnInit(): void {

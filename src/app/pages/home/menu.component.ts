@@ -4,6 +4,9 @@ import { PizzaInterface } from "../../interfaces/pizza.interface";
 import { CategoryInterface } from "../../interfaces/category.interface";
 import { ApiService } from "../../services/api.service";
 import { ProductInterface } from "../../interfaces/product.interface";
+import { CartService } from "../../services/cart.service";
+
+type Item = ProductInterface | PizzaInterface
 
 @Component({
   selector: 'app-menu',
@@ -20,6 +23,7 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private api: ApiService,
+    private cart: CartService,
   ) {
   }
 
@@ -33,8 +37,8 @@ export class MenuComponent implements OnInit {
       })
   }
 
-  addToCart(event: any): void {
-    console.log(event);
+  addToCart(event: { product: Item, quantity: number }): void {
+    this.cart.add(event.product, event.quantity)
   }
 
   filterByCategoryId<T extends ProductInterface>(items: T[], id: number): T[] {
