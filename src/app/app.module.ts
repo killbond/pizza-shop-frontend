@@ -14,6 +14,7 @@ import { RouterModule } from "@angular/router";
 import { SharedModule } from "./shared.module";
 import { InputStepperModule } from "./components/input-stepper/input-stepper.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { DeliveryModule } from "./components/delivery/delivery.module";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     SharedModule,
     InputStepperModule,
     FontAwesomeModule,
+    DeliveryModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

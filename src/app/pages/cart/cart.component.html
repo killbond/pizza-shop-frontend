@@ -2,17 +2,17 @@
   <h1 class="display-4">Cart</h1>
 </div>
 
-<div *ngIf="cart.count() == 0" class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+<div *ngIf="cart.isEmpty()" class="mx-auto text-center flex-grow-1 flex-shrink-0 d-flex align-items-center mb-5">
   <h1 class="lead">Empty</h1>
 </div>
 
-<div *ngIf="cart.count() > 0" class="container">
+<div *ngIf="!cart.isEmpty()" class="container">
   <table class="table table-hover table-condensed" id="cart">
     <thead>
     <tr>
       <th style="width:50%">Product</th>
       <th style="width:10%">Price</th>
-      <th style="width:12%">Quantity</th>
+      <th class="text-center" style="width:12%">Quantity</th>
       <th class="text-center" style="width:15%">Subtotal</th>
       <th style="width:13%"></th>
     </tr>
@@ -46,15 +46,51 @@
         </button>
       </td>
     </tr>
+    <tr>
+      <td colspan="3" data-th="Delivery">
+        <app-delivery #delivery [errors]="errors"></app-delivery>
+      </td>
+      <td class="text-md-center" data-th="Total">
+        {{ delivery.price | price }}
+      </td>
+      <td class="hidden-sm"></td>
+    </tr>
     </tbody>
     <tfoot>
     <tr>
-      <td><a [routerLink]="['/menu']" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+      <td>
+        <a [routerLink]="['/menu']" class="btn btn-outline-primary">
+          <fa-icon [icon]="faArrowLeft" class="mr-2"></fa-icon>
+          Continue Shopping
+        </a>
       </td>
       <td class="hidden-sm" colspan="2"></td>
       <td class="hidden-sm text-center"><strong>Total <span>{{ total | price }}</span></strong></td>
-      <td><a class="btn btn-success btn-block" href="#">Checkout <i class="fa fa-angle-right"></i></a></td>
+      <td>
+        <button (click)="sendOrder()" [disabled]="sending" class="btn btn-success btn-block">
+          <fa-icon *ngIf="sending" [icon]="faSpinner" [spin]="true"></fa-icon>
+          Checkout
+        </button>
+      </td>
     </tr>
     </tfoot>
   </table>
 </div>
+
+<ng-template #successSend let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <button (click)="modal.close('Close click')" class="close" data-dismiss="modal" type="button">
+        <span>×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="thank-you-pop">
+        <img alt="" src="/assets/images/Green-Round-Tick.png">
+        <h1>Thank You!</h1>
+        <p>Your submission is received and we will contact you soon</p>
+        <h3 class="cupon-pop">Your order ID: <span>#{{ createdOrder.id }}</span></h3>
+      </div>
+    </div>
+  </div>
+</ng-template>

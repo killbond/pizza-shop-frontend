@@ -1,5 +1,7 @@
+import { ValidationBagInterface } from "./validation-bag.interface";
+
 export interface ApiResponseInterface {
   data?: any
-  errors?: Object
+  errors?: ValidationBagInterface
   message?: string
 }

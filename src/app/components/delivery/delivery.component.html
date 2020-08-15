@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-12">
+    <div class="form-check">
+      <input [(ngModel)]="type_id" [value]="2" class="form-check-input" id="takeaway" name="type_id" type="radio">
+      <label class="form-check-label" for="takeaway">
+        Takeaway
+      </label>
+    </div>
+    <div class="form-check mt-2">
+      <input [(ngModel)]="type_id" [value]="1" class="form-check-input" id="delivery" name="type_id" type="radio">
+      <label class="form-check-label" for="delivery">
+        Delivery to address:
+      </label>
+    </div>
+  </div>
+</div>
+<div *ngIf="type_id == 1" class="row mt-2">
+  <div class="col-12">
+    <div class="input-group">
+      <input [(ngModel)]="address"
+             [class.is-invalid]="errors?.hasOwnProperty('delivery.coordinates.address')"
+             class="form-control rounded-left"
+             name="address"
+             type="text">
+      <div class="input-group-append">
+        <span class="input-group-text">
+          <fa-icon [icon]="faMapMarker"></fa-icon>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-12">
+    <label for="phone">Your contact phone:</label>
+    <div class="input-group">
+      <input [(ngModel)]="phone"
+             [class.is-invalid]="errors?.hasOwnProperty('phone')"
+             class="form-control rounded-left"
+             id="phone" name="phone"
+             type="text">
+      <div class="input-group-append">
+          <span class="input-group-text">
+            <fa-icon [icon]="faPhone"></fa-icon>
+          </span>
+      </div>
+    </div>
+  </div>
+</div>
