@@ -1,0 +1,61 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.table > tbody > tr > td, .table > tfoot > tr > td {
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 600px) {
+  table#cart tbody td .form-control {
+    width: 20%;
+    display: inline !important;
+  }
+  .actions .btn {
+    width: 36%;
+    margin: 1.5em 0;
+  }
+
+  .actions .btn-info {
+    float: left;
+  }
+  .actions .btn-danger {
+    float: right;
+  }
+
+  .product-body {
+    margin-top: 1rem;
+  }
+
+  .hidden-sm {
+    display: none;
+  }
+
+  table#cart thead {
+    display: none;
+  }
+  table#cart tbody td {
+    display: flex;
+    padding: .6rem;
+
+    &:first-child {
+      border-top: 3px solid #ddd;
+    }
+  }
+  table#cart tbody td:before {
+    content: attr(data-th);
+    font-weight: bold;
+    display: inline-block;
+    width: 8rem;
+  }
+
+  table#cart tfoot td {
+    display: block;
+  }
+  table#cart tfoot td .btn {
+    display: block;
+  }
+
+}
