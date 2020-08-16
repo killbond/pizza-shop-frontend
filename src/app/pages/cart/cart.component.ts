@@ -32,7 +32,7 @@ export class CartComponent implements OnInit {
 
   sending: boolean = false
 
-  errors: ValidationBagInterface
+  errors: ValidationBagInterface = {}
 
   constructor(
     private currency: CurrencyService,
