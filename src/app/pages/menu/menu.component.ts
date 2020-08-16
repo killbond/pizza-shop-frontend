@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { combineLatest } from "rxjs";
 import { PizzaInterface } from "../../interfaces/pizza.interface";
 import { CategoryInterface } from "../../interfaces/category.interface";
-import { ApiService } from "../../services/api.service";
 import { ProductInterface } from "../../interfaces/product.interface";
 import { CartService } from "../../services/cart.service";
+import { ProductService } from "../../services/product.service";
+import { CategoryService } from "../../services/category.service";
 
 type Item = ProductInterface | PizzaInterface
 
@@ -22,19 +23,23 @@ export class MenuComponent implements OnInit {
   categories: CategoryInterface[]
 
   constructor(
-    private api: ApiService,
+    private categoryService: CategoryService,
+    private productService: ProductService,
     private cart: CartService,
   ) {
   }
 
   ngOnInit(): void {
-    combineLatest([this.api.get('pizzas'), this.api.get('products'), this.api.get('categories')])
-      .subscribe((data: [PizzaInterface[], ProductInterface[], CategoryInterface[]]) => {
-        let [pizzas, products, categories] = data
-        this.categories = categories.filter((category: CategoryInterface) => category.id != 1)
-        this.products = products
-        this.pizzas = pizzas
-      })
+    combineLatest([
+      this.productService.getPizzas(),
+      this.productService.getProducts(),
+      this.categoryService.getCategories(),
+    ]).subscribe((data: [PizzaInterface[], ProductInterface[], CategoryInterface[]]) => {
+      let [pizzas, products, categories] = data
+      this.categories = categories.filter((category: CategoryInterface) => category.id != 1)
+      this.products = products
+      this.pizzas = pizzas
+    })
   }
 
   addToCart(event: { product: Item, quantity: number }): void {

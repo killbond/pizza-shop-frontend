@@ -6,6 +6,7 @@ import { MenuComponent } from './menu.component';
 import { SharedModule } from "../../shared.module";
 import { ProductCardModule } from "../../components/product-card/product-card.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { NavbarModule } from "../../components/navbar/navbar.module";
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     CommonModule,
     MenuRoutingModule,
     ProductCardModule,
+    NavbarModule,
     FontAwesomeModule,
     SharedModule,
   ]
