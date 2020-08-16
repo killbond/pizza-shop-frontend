@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { CartService } from "./services/cart.service";
+import { CurrencyService } from "./services/currency.service";
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,15 @@ import { CartService } from "./services/cart.service";
 })
 export class AppComponent {
 
-  constructor(private cart: CartService) {
+  constructor(
+    private cart: CartService,
+    private currencyService: CurrencyService,
+  ) {
   }
 
   @HostListener('window:unload')
   unloadHandler() {
     this.cart.save()
+    this.currencyService.save()
   }
 }
