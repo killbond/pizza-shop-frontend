@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError, finalize, map } from "rxjs/operators";
+import { catchError, finalize, map, switchMap } from "rxjs/operators";
 import { ApiResponseInterface } from "../../interfaces/api-response.interface";
 import { Observable, of } from "rxjs";
 import { ValidationBagInterface } from "../../interfaces/validation-bag.interface";
@@ -42,10 +42,7 @@ export class LoginComponent implements OnInit {
       .pipe(
         catchError(this.errorHandling.bind(this)),
         finalize(() => this.sending = false),
-        map(() => {
-          this.errors = {}
-          return this.router.navigate(['/menu'])
-        }),
+        switchMap(() => this.router.navigate(['/menu'])),
       ).subscribe()
   }
 

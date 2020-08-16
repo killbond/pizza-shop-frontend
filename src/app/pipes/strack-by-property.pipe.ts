@@ -13,7 +13,6 @@ var cache: TrackByFunctionCache = Object.create(null);
 export class TrackByPropertyPipe<T> implements PipeTransform {
 
   public transform(propertyName: string): TrackByFunction<T> {
-    console.warn(`Getting track-by for [${propertyName}].`);
     if (!cache[propertyName]) {
       cache[propertyName] = function trackByProperty<T>(index: number, item: T): any {
         return (item[propertyName]);
