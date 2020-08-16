@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-import { NavbarModule } from "./components/navbar/navbar.module";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "./shared.module";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
@@ -19,7 +18,6 @@ import { JWT_OPTIONS, JwtHelperService } from "@auth0/angular-jwt";
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
-    NavbarModule,
     SharedModule,
   ],
   providers: [

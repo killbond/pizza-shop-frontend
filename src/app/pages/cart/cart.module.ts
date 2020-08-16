@@ -7,6 +7,7 @@ import { SharedModule } from "../../shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { DeliveryModule } from "../../components/delivery/delivery.module";
 import { InputStepperModule } from "../../components/input-stepper/input-stepper.module";
+import { NavbarModule } from "../../components/navbar/navbar.module";
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { InputStepperModule } from "../../components/input-stepper/input-stepper
     CartRoutingModule,
     SharedModule,
     FontAwesomeModule,
+    NavbarModule,
     DeliveryModule,
     InputStepperModule,
   ]

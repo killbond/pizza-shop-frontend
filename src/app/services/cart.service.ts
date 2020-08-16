@@ -19,6 +19,7 @@ export class CartService {
   constructor(
     private api: ApiService
   ) {
+    this.positions = JSON.parse(localStorage.getItem('cart')) || []
   }
 
   add(product: Item, quantity: number): void {
@@ -65,6 +66,10 @@ export class CartService {
 
   flush() {
     this.positions.length = 0
+  }
+
+  save() {
+    localStorage.setItem('cart', JSON.stringify(this.positions))
   }
 
   private findIndex(product: Item): number {
