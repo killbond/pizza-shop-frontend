@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CartComponent } from "./pages/cart/cart.component";
-import { HistoryComponent } from "./pages/history/history.component";
-import { LoginComponent } from "./pages/login/login.component";
-import { MenuComponent } from "./pages/home/menu.component";
 import { AuthGuard } from "./guards/auth.guard";
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/menu', pathMatch: 'full'},
-  {path: 'menu', component: MenuComponent},
-  {path: 'cart', component: CartComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'history', component: HistoryComponent, canActivate: [AuthGuard]},
+  {path: 'menu', loadChildren: () => import('./pages/menu/menu.module').then(m => m.MenuModule)},
+  {path: 'cart', loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule)},
+  {path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)},
+  {path: 'register', loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule)},
+  {path: 'history', loadChildren: () => import('./pages/history/history.module').then(m => m.HistoryModule), canActivate: [AuthGuard]},
 ];
 
 @NgModule({
