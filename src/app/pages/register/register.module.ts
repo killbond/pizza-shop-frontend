@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import { SharedModule } from "../../shared.module";
+import { FormsModule } from "@angular/forms";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 
 @NgModule({
@@ -11,6 +13,8 @@ import { SharedModule } from "../../shared.module";
   imports: [
     CommonModule,
     RegisterRoutingModule,
+    FormsModule,
+    FontAwesomeModule,
     SharedModule,
   ]
 })
