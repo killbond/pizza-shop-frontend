@@ -41,6 +41,10 @@ export class CurrencyService {
       }))
   }
 
+  getCurrencyById(id: number): CurrencyInterface {
+    return this.currencies.find((currency: CurrencyInterface) => currency.id == id)
+  }
+
   save(): void {
     localStorage.setItem('active_currency', JSON.stringify(this.active))
   }

@@ -39,6 +39,9 @@
       <li *ngIf="authorized" class="nav-item">
         <a (click)="logout()" class="nav-link" href="#">Log out</a>
       </li>
+      <li *ngIf="authorized" class="nav-item">
+        <a [routerLink]="['/history']" class="nav-link">History</a>
+      </li>
     </ul>
   </div>
 </nav>
