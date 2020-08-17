@@ -26,6 +26,11 @@ export class AuthService {
       }));
   }
 
+  logout(): void {
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('jwt')
+  }
+
   isAuthenticated(): boolean {
     return localStorage.getItem('access_token') != null && localStorage.getItem('jwt') != null;
   }

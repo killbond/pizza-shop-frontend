@@ -1,5 +1,5 @@
 export interface TokenInterface {
   access_token: string
-  expires_at: Date
+  expires_at: string
   type: string
 }
