@@ -5,6 +5,8 @@ import { CartService } from "../../services/cart.service";
 import { faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { AuthService } from "../../services/auth.service";
 import { UserInterface } from "../../interfaces/user.interface";
+import { Router } from "@angular/router";
+import { switchMap } from "rxjs/operators";
 
 @Component({
   selector: 'app-navbar',
@@ -27,6 +29,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
+    private router: Router,
     public currency: CurrencyService,
     public currencyService: CurrencyService,
     public cart: CartService,
@@ -42,9 +45,8 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.auth.logout()
-      .subscribe(() => {
-        window.location.reload()
-      })
+      .pipe(switchMap(() => this.router.navigate([''])))
+      .subscribe()
   }
 
 }
