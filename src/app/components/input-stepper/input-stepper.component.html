@@ -1,0 +1,13 @@
+<div class="input-group">
+    <div class="input-group-prepend">
+        <button (click)="set(value - 1)" class="btn btn-primary btn-sm">
+            <fa-icon [icon]="faMinus"></fa-icon>
+        </button>
+    </div>
+    <input class="form-control form-control-sm text-center" name="quantity" readonly type="text" value="{{ value }}">
+    <div class="input-group-append">
+        <button (click)="set(value + 1)" class="btn btn-primary btn-sm">
+            <fa-icon [icon]="faPlus"></fa-icon>
+        </button>
+    </div>
+</div>

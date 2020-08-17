@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+
+<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Order history</h1>
+</div>
+
+<ng-template #empty>
+  <div class="mx-auto text-center flex-grow-1 flex-shrink-0 d-flex align-items-center mb-5">
+    <h1 class="lead">Empty</h1>
+  </div>
+</ng-template>
+
+<div *ngIf="0 != orders.length else empty" class="container">
+  <table class="table table-hover table-condensed" id="cart">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Delivery</th>
+      <th class="text-md-center">Date</th>
+      <th>Positions</th>
+      <th class="text-md-center">Currency</th>
+      <th class="text-md-center">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders; trackBy: ('id' | trackByProperty)" class="small">
+      <td data-th="ID">
+        {{ order.id }}
+      </td>
+      <td data-th="Delivery">
+        <div *ngIf="1 == order.delivery.type_id">
+          <p class="m-0">Delivery to address:</p>
+          <p class="m-0">{{ order.delivery.coordinates.address }}</p>
+        </div>
+        <p *ngIf="2 == order.delivery.type_id" class="m-0">Takeaway</p>
+      </td>
+      <td class="text-md-center" data-th="Date">
+        {{ order.created_at | datetime }}
+      </td>
+      <td data-th="Positions">
+        <ul class="m-0 pl-3">
+          <li *ngFor="let position of order.positions">
+            {{ position.name }} x {{ position.quantity }}
+          </li>
+        </ul>
+      </td>
+      <td class="text-md-center" data-th="Currency">
+        {{ getCurrency(order).code }}
+      </td>
+      <td class="text-md-center" data-th="Price">
+        <b>{{ order.total | price:getCurrency(order) }}</b>
+      </td>
+    </tr>
+  </table>
+</div>
