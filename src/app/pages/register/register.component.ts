@@ -43,6 +43,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
+    this.sending = true
     this.userService.register(this.newUser())
       .pipe(
         catchError(this.errorHandling.bind(this)),
