@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
 import { Observable } from "rxjs";
 import { TokenInterface } from "../interfaces/token.interface";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
@@ -26,9 +26,12 @@ export class AuthService {
       }));
   }
 
-  logout(): void {
-    localStorage.removeItem('access_token')
-    localStorage.removeItem('jwt')
+  logout(): Observable<void> {
+    return this.api.delete('auth/login')
+      .pipe(tap(() => {
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('jwt')
+      }))
   }
 
   isAuthenticated(): boolean {
