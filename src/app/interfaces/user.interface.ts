@@ -1,7 +1,9 @@
-export interface UserInterface {
+import { EntityInterface } from "./entity.interface";
+
+export interface UserInterface extends EntityInterface {
   name: string
-  email: string
-  password: string
-  password_confirmation: string
   phone: string
+  email: string
+  created_at: string
+  updated_at: string
 }

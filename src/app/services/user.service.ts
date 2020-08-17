@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
 import { Observable } from "rxjs";
-import { UserInterface } from "../interfaces/user.interface";
+import { UserCreateRequestInterface } from "../interfaces/user-create-request.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class UserService {
   ) {
   }
 
-  register(user: UserInterface): Observable<any> {
+  register(user: UserCreateRequestInterface): Observable<any> {
     return this.api.post('users', user)
   }
 }

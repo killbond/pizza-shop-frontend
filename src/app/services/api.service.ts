@@ -26,12 +26,12 @@ export class ApiService {
   }
 
   delete<T>(path: string, body: any = null): Observable<T> {
-    return this.http.request(this.endpoint + path, body)
+    return this.request('delete', path, body)
   }
 
   private request<T>(method: string, path: string, body: any = null): Observable<T> {
-    return this.http.request(method, this.endpoint + path, {body: body})
-      .pipe(map((response: ApiResponseInterface) => response.data ?? response))
+    return this.http.request(method, this.endpoint + path, body ? {body} : {})
+      .pipe(map((response: ApiResponseInterface) => response?.data ?? response))
   }
 
 }

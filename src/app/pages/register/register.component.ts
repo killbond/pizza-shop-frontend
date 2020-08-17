@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidationBagInterface } from "../../interfaces/validation-bag.interface";
 import { UserService } from "../../services/user.service";
-import { UserInterface } from "../../interfaces/user.interface";
-import { catchError, finalize, map, switchMap } from "rxjs/operators";
+import { UserCreateRequestInterface } from "../../interfaces/user-create-request.interface";
+import { catchError, finalize, switchMap } from "rxjs/operators";
 import { Observable, of } from "rxjs";
 import { ApiResponseInterface } from "../../interfaces/api-response.interface";
 import { Router } from "@angular/router";
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
     return of()
   }
 
-  private newUser(): UserInterface {
+  private newUser(): UserCreateRequestInterface {
     return {
       name: this.name,
       password: this.password,
