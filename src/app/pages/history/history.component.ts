@@ -22,7 +22,7 @@ export class HistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.api.get('users/' + this.auth.getUserId() + '/orders')
+    this.api.get('users/' + this.auth.user.id + '/orders')
       .subscribe((orders: OrderResponseInterface[]) => this.orders = orders)
   }
 

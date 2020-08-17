@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faMapMarkerAlt, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { ValidationBagInterface } from "../../interfaces/validation-bag.interface";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-delivery',
@@ -21,7 +22,9 @@ export class DeliveryComponent implements OnInit {
 
   @Input() errors: ValidationBagInterface
 
-  constructor() {
+  constructor(
+    private auth: AuthService,
+  ) {
   }
 
   get price(): number {
@@ -29,6 +32,7 @@ export class DeliveryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.phone = this.auth.user?.phone || ''
   }
 
 }

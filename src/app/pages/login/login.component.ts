@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError, finalize, map, switchMap } from "rxjs/operators";
+import { catchError, finalize } from "rxjs/operators";
 import { ApiResponseInterface } from "../../interfaces/api-response.interface";
 import { Observable, of } from "rxjs";
 import { ValidationBagInterface } from "../../interfaces/validation-bag.interface";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
+    private location: Location,
     private router: Router,
   ) {
   }
@@ -42,8 +44,9 @@ export class LoginComponent implements OnInit {
       .pipe(
         catchError(this.errorHandling.bind(this)),
         finalize(() => this.sending = false),
-        switchMap(() => this.router.navigate(['/menu'])),
-      ).subscribe()
+      ).subscribe(() => {
+      this.location.back()
+    })
   }
 
   private errorHandling({error: response}): Observable<void> {

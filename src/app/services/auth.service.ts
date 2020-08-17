@@ -2,13 +2,19 @@ import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
 import { Observable } from "rxjs";
 import { TokenInterface } from "../interfaces/token.interface";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserInterface } from "../interfaces/user.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  get user(): UserInterface {
+    let jwt = JSON.parse(localStorage.getItem('jwt'))
+    return jwt?.user
+  }
 
   constructor(
     private api: ApiService,
@@ -26,19 +32,16 @@ export class AuthService {
       }));
   }
 
-  logout(): void {
-    localStorage.removeItem('access_token')
-    localStorage.removeItem('jwt')
+  logout(): Observable<unknown> {
+    return this.api.delete('auth/login')
+      .pipe(tap(() => {
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('jwt')
+      }))
   }
 
   isAuthenticated(): boolean {
-    return localStorage.getItem('access_token') != null && localStorage.getItem('jwt') != null;
-  }
-
-  getUserId(): number {
-    let jwt = localStorage.getItem('jwt'),
-      userData = JSON.parse(jwt)
-    return userData.sub
+    return localStorage.getItem('access_token') != null && localStorage.getItem('jwt') != null
   }
 
 }

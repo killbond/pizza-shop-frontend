@@ -14,19 +14,24 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-  ) {}
+  ) {
+  }
 
   get<T>(path: string): Observable<T> {
     return this.request('get', path)
   }
 
-  post<T>(path: string, body: any): Observable<T> {
+  post<T>(path: string, body: any = null): Observable<T> {
     return this.request('post', path, body)
   }
 
+  delete<T>(path: string, body: any = null): Observable<T> {
+    return this.request('delete', path, body)
+  }
+
   private request<T>(method: string, path: string, body: any = null): Observable<T> {
-    return this.http.request(method, this.endpoint + path, {body: body})
-      .pipe(map((response: ApiResponseInterface) => response.data ?? response))
+    return this.http.request(method, this.endpoint + path, body ? {body} : {})
+      .pipe(map((response: ApiResponseInterface) => response?.data ?? response))
   }
 
 }

@@ -5,3 +5,12 @@
   right: -8px;
   float: right;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.nav-item.simple-item .nav-link {
+  padding-left: 12px;
+  padding-right: 12px;
+}

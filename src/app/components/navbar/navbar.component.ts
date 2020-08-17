@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CurrencyService } from "../../services/currency.service";
 import { CurrencyInterface } from "../../interfaces/currency.interface";
 import { CartService } from "../../services/cart.service";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { AuthService } from "../../services/auth.service";
+import { UserInterface } from "../../interfaces/user.interface";
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,11 @@ export class NavbarComponent implements OnInit {
 
   faCart = faShoppingCart
 
+  faUser = faUser
+
   authorized: boolean = false
+
+  user: UserInterface
 
   constructor(
     private auth: AuthService,
@@ -29,6 +34,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.auth.user
     this.authorized = this.auth.isAuthenticated()
     this.currencyService.getCurrencies()
       .subscribe((currencies: CurrencyInterface[]) => this.currencies = currencies)
@@ -36,6 +42,9 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.auth.logout()
+      .subscribe(() => {
+        window.location.reload()
+      })
   }
 
 }
